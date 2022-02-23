@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ImgSlider from "./ImgSlider";
+import Movies from "./Movies";
 import Viewers from "./Viewers";
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
         <Container>
             <ImgSlider />
             <Viewers />
+            <Movies />
         </Container>
     );
 }

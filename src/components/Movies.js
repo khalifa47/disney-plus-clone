@@ -6,7 +6,25 @@ const Movies = () => {
             <h4>Recommended For You</h4>
             <Content>
                 <Wrap>
-                    <img src="" alt="" />
+                    <img src="https://catholicreview.org/wp-content/uploads/2021/07/20210623T1100-MOVIE-REVIEW-F9-FAST-SAGA-1250672-768x512.jpg" alt="" />
+                </Wrap>
+                <Wrap>
+                    <img src="https://catholicreview.org/wp-content/uploads/2021/07/20210623T1100-MOVIE-REVIEW-F9-FAST-SAGA-1250672-768x512.jpg" alt="" />
+                </Wrap>
+                <Wrap>
+                    <img src="https://catholicreview.org/wp-content/uploads/2021/07/20210623T1100-MOVIE-REVIEW-F9-FAST-SAGA-1250672-768x512.jpg" alt="" />
+                </Wrap>
+                <Wrap>
+                    <img src="https://catholicreview.org/wp-content/uploads/2021/07/20210623T1100-MOVIE-REVIEW-F9-FAST-SAGA-1250672-768x512.jpg" alt="" />
+                </Wrap>
+                <Wrap>
+                    <img src="https://catholicreview.org/wp-content/uploads/2021/07/20210623T1100-MOVIE-REVIEW-F9-FAST-SAGA-1250672-768x512.jpg" alt="" />
+                </Wrap>
+                <Wrap>
+                    <img src="https://catholicreview.org/wp-content/uploads/2021/07/20210623T1100-MOVIE-REVIEW-F9-FAST-SAGA-1250672-768x512.jpg" alt="" />
+                </Wrap>
+                <Wrap>
+                    <img src="https://catholicreview.org/wp-content/uploads/2021/07/20210623T1100-MOVIE-REVIEW-F9-FAST-SAGA-1250672-768x512.jpg" alt="" />
                 </Wrap>
             </Content>
         </Container>
@@ -41,7 +59,7 @@ const Wrap = styled.div`
 
     &:hover{
         box-shadow: rgb(0 0 0 / 80%) 0px 40px 58px -16px, rgb(0 0 0 / 73%) 0px 30px 22px -10px;
-        transform: scale(1.85);
+        transform: scale(1.05);
         border-color: rgba(249, 249, 249, 0.8);
     }
 `;

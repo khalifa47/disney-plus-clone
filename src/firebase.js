@@ -4,13 +4,12 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA9BnlX96fMf7XiUVCFRsoQzG8DGERJkeY",
-  authDomain: "disneyplus-clone-a33d5.firebaseapp.com",
-  projectId: "disneyplus-clone-a33d5",
-  storageBucket: "disneyplus-clone-a33d5.appspot.com",
-  messagingSenderId: "37918794208",
-  appId: "1:37918794208:web:dbe9842dfe1dda522a4b85",
-  measurementId: "G-DRVLJKWRWG",
+  apiKey: "AIzaSyCBZ6TlVBKOucn1cqcH0LZz-edBF5mz-Cc",
+  authDomain: "disney-clone-plus-ae2ae.firebaseapp.com",
+  projectId: "disney-clone-plus-ae2ae",
+  storageBucket: "disney-clone-plus-ae2ae.appspot.com",
+  messagingSenderId: "1055355379786",
+  appId: "1:1055355379786:web:89eb7a9e749fbc188606b3"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -39,7 +39,7 @@ const Container = styled.main`
     overflow-x: hidden;
 
     &:before{
-        background: url('/assets/images/home-background.png') center center / cover no-repeat fixed;
+        background: url('/images/home-background.png') center center / cover no-repeat fixed;
         content: "";
         position: absolute;
         top: 0;

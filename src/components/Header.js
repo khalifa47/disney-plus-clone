@@ -49,32 +49,32 @@ const Header = () => {
 
     return (
         <Nav>
-            <Logo src="/assets/images/logo.svg" />
+            <Logo src="/images/logo.svg" />
             {!userName ? <LoginContainer><Login onClick={signIn}>Login</Login></LoginContainer> :
                 <>
                     <NavMenu>
                         <a>
-                            <img src="/assets/images/home-icon.svg" alt="home" />
+                            <img src="/images/home-icon.svg" alt="home" />
                             <span>HOME</span>
                         </a>
                         <a>
-                            <img src="/assets/images/search-icon.svg" alt="home" />
+                            <img src="/images/search-icon.svg" alt="home" />
                             <span>SEARCH</span>
                         </a>
                         <a>
-                            <img src="/assets/images/watchlist-icon.svg" alt="home" />
+                            <img src="/images/watchlist-icon.svg" alt="home" />
                             <span>WATCHLIST</span>
                         </a>
                         <a>
-                            <img src="/assets/images/original-icon.svg" alt="home" />
+                            <img src="/images/original-icon.svg" alt="home" />
                             <span>ORIGINALS</span>
                         </a>
                         <a>
-                            <img src="/assets/images/movie-icon.svg" alt="home" />
+                            <img src="/images/movie-icon.svg" alt="home" />
                             <span>MOVIES</span>
                         </a>
                         <a>
-                            <img src="/assets/images/series-icon.svg" alt="home" />
+                            <img src="/images/series-icon.svg" alt="home" />
                             <span>SERIES</span>
                         </a>
                     </NavMenu>

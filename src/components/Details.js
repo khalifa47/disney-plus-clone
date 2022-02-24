@@ -32,18 +32,18 @@ const Details = () => {
                     </ImageTitle>
                     <Controls>
                         <PlayButton>
-                            <img src="/assets/images/play-icon-black.png" alt="" />
+                            <img src="/images/play-icon-black.png" alt="" />
                             <span>PLAY</span>
                         </PlayButton>
                         <TrailerButton>
-                            <img src="/assets/images/play-icon-white.png" alt="" />
+                            <img src="/images/play-icon-white.png" alt="" />
                             <span>Trailer</span>
                         </TrailerButton>
                         <AddButton>
                             <span>+</span>
                         </AddButton>
                         <GroupWatchButton>
-                            <img src="/assets/images/group-icon.png" alt="" />
+                            <img src="/images/group-icon.png" alt="" />
                         </GroupWatchButton>
 
                     </Controls>

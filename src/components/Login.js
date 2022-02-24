@@ -4,12 +4,12 @@ const Login = () => {
     return (
         <Container>
             <CTA>
-                <CTALogoOne src='/assets/images/cta-logo-one.svg' />
+                <CTALogoOne src='/images/cta-logo-one.svg' />
                 <SignUp>GET ALL THERE</SignUp>
                 <Description>
                     Get The Disney Bundle to stream the best movies, shows, and sports with Disney+, Hulu, and ESPN+. Terms Apply. Learn more about The Disney Bundle.
                 </Description>
-                <CTALogoTwo src='/assets/images/cta-logo-two.png' />
+                <CTALogoTwo src='/images/cta-logo-two.png' />
             </CTA>
         </Container>
     );
@@ -28,7 +28,7 @@ const Container = styled.div`
         background-position: top;
         background-size: cover;
         background-repeat: no-repeat;
-        background-image: url('/assets/images/login-background.jpg');
+        background-image: url('/images/login-background.jpg');
         content: "";
         position: absolute;
         top: 0;

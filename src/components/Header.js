@@ -2,7 +2,7 @@ import { onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { selectUserName, selectUserPhoto, setSignOut, setUserLogin } from "../features/user/userSlice";
 import { auth, provider } from "../firebase";
@@ -22,7 +22,6 @@ const Header = () => {
                     email: authUser.email,
                     photo: authUser.photoURL
                 }));
-                history('/', true);
             }
         });
     }, []);
@@ -35,7 +34,7 @@ const Header = () => {
                     email: result.user.email,
                     photo: result.user.photoURL
                 }));
-                history('/', true);
+                history('/home', true);
             });
     };
 
@@ -43,20 +42,23 @@ const Header = () => {
         signOut(auth)
             .then(() => {
                 dispatch(setSignOut());
-                history('/login', true);
+                history('/', true);
             });
     }
 
     return (
         <Nav>
-            <Logo src="/images/logo.svg" />
+            <Link to="/">
+                <Logo src="/images/logo.svg" />
+            </Link>
+
             {!userName ? <LoginContainer><Login onClick={signIn}>Login</Login></LoginContainer> :
                 <>
                     <NavMenu>
-                        <a>
+                        <Link to='/home'>
                             <img src="/images/home-icon.svg" alt="home" />
                             <span>HOME</span>
-                        </a>
+                        </Link>
                         <a>
                             <img src="/images/search-icon.svg" alt="home" />
                             <span>SEARCH</span>
@@ -78,7 +80,12 @@ const Header = () => {
                             <span>SERIES</span>
                         </a>
                     </NavMenu>
-                    <UserImg onClick={logOut} src={userPhoto} alt={userName} />
+                    <SignOut>
+                        <UserImg src={userPhoto} alt={userName} />
+                        <Dropdown>
+                            <span onClick={logOut}>SIGN OUT</span>
+                        </Dropdown>
+                    </SignOut>
                 </>
             }
         </Nav>
@@ -172,4 +179,36 @@ const LoginContainer = styled.div`
     display: flex;
     flex: 1;
     justify-content: flex-end;
+`;
+
+const Dropdown = styled.div`
+    position: absolute;
+    top: -3px;
+    right: 45px;
+    background: rgb(19, 19, 19);
+    border: 1px solid rgba(151, 151, 151, 0.34);
+    border-radius: 4px;
+    box-shadow: rgb(0 0 0 / 50%) 0px 0px 18px 0px;
+    padding: 10px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    width: 100px;
+    opacity: 0;
+`;
+
+const SignOut = styled.div`
+    position: relative;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        ${Dropdown} {
+            opacity: 1;
+            transition-duration: 250ms;
+        }
+    }
 `;

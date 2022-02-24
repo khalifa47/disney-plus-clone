@@ -1,38 +1,61 @@
+import { doc, getDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import db from "../firebase";
 
 const Details = () => {
+    const history = useNavigate();
+    const { id } = useParams();
+    const [movie, setMovie] = useState();
+
+    useEffect(() => {
+        getDoc(doc(db, 'movies', id))
+            .then(doc => {
+                if (doc.exists) {
+                    setMovie(doc.data());
+                } else {
+                    history('/');
+                }
+            });
+    }, []);
+
     return (
         <Container>
-            <Background>
-                <img src="https://prd-rteditorial.s3.us-west-2.amazonaws.com/wp-content/uploads/2019/09/01093013/Endgame-Lead-1.jpg" alt="" />
-            </Background>
-            <ImageTitle>
-                <img src="/assets/images/avengers.png" alt="" />
-            </ImageTitle>
-            <Controls>
-                <PlayButton>
-                    <img src="/assets/images/play-icon-black.png" alt="" />
-                    <span>PLAY</span>
-                </PlayButton>
-                <TrailerButton>
-                    <img src="/assets/images/play-icon-white.png" alt="" />
-                    <span>Trailer</span>
-                </TrailerButton>
-                <AddButton>
-                    <span>+</span>
-                </AddButton>
-                <GroupWatchButton>
-                    <img src="/assets/images/group-icon.png" alt="" />
-                </GroupWatchButton>
+            {movie && (
+                <>
+                    <Background>
+                        <img src={movie.backgroundImg} alt="" />
+                    </Background>
+                    <ImageTitle>
+                        <img src={movie.titleImg} alt="" />
+                    </ImageTitle>
+                    <Controls>
+                        <PlayButton>
+                            <img src="/assets/images/play-icon-black.png" alt="" />
+                            <span>PLAY</span>
+                        </PlayButton>
+                        <TrailerButton>
+                            <img src="/assets/images/play-icon-white.png" alt="" />
+                            <span>Trailer</span>
+                        </TrailerButton>
+                        <AddButton>
+                            <span>+</span>
+                        </AddButton>
+                        <GroupWatchButton>
+                            <img src="/assets/images/group-icon.png" alt="" />
+                        </GroupWatchButton>
 
-            </Controls>
+                    </Controls>
 
-            <Subtitle>
-                Some placeholder text
-            </Subtitle>
-            <Description>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit fugit quia quaerat qui molestias mollitia pariatur iusto nesciunt repellendus facere.
-            </Description>
+                    <Subtitle>
+                        {movie.subTitle}
+                    </Subtitle>
+                    <Description>
+                        {movie.description}
+                    </Description>
+                </>
+            )}
         </Container>
     );
 }

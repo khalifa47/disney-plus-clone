@@ -24,7 +24,7 @@ const Home = () => {
 
     return (
         <Container>
-            <ImgSlider />
+            <ImgSlider fetchImages={requests.fetchPlaying} />
             <Viewers />
             <Movies
                 title="Recommended For You"

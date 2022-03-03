@@ -8,7 +8,8 @@ const requests = {
     fetchPlaying: `/movie/now_playing?api_key=${API_KEY}`,
     fetchTrending: (media_type, time_window) => `/trending/${media_type}/${time_window}?api_key=${API_KEY}`,
     fetchDiscover: (genre = null, sort_by = 'popularity.desc') => `/discover/movie?with_genres=${genre}&sort_by=${sort_by}&api_key=${API_KEY}`,
-    fetchById: (id) => `/movie/${id}?api_key=${API_KEY}`
+    fetchById: (id) => `/movie/${id}?api_key=${API_KEY}`,
+    fetchTrailers: (id) => `/movie/${id}/videos?api_key=${API_KEY}`
 };
 
 export default requests;

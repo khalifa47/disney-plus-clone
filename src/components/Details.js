@@ -4,13 +4,26 @@ import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from '../requests/axios';
 import requests from "../requests/requests";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import YouTube from "react-youtube";
 // import db from "../firebase";
 
 const Details = () => {
     // const history = useNavigate();
     const { id } = useParams();
     const [movie, setMovie] = useState();
+    const [trailers, setTrailers] = useState([]);
     const imageBasePath = "https://image.tmdb.org/t/p/original";
+
+    const opts = {
+        width: '100%',
+
+        playerVars: {
+            autoplay: 1,
+            playsinline: 1
+        }
+    };
 
     // useEffect(() => {
     //     getDoc(doc(db, 'movies', id))
@@ -27,8 +40,19 @@ const Details = () => {
 
     useEffect(() => {
         const fetchData = async () => {
+            let temp = [];
+
             const request = await axios.get(requests.fetchById(id));
+            const trailerRequest = await axios.get(requests.fetchTrailers(id));
+
+            trailerRequest.data.results.forEach(result => {
+                if (result.type === "Trailer") {
+                    temp.push(result);
+                }
+            });
+
             setMovie(request.data);
+            setTrailers(temp)
             return request;
         }
         fetchData();
@@ -49,10 +73,26 @@ const Details = () => {
                             <img src="/images/play-icon-black.png" alt="" />
                             <span>PLAY</span>
                         </PlayButton>
-                        <TrailerButton>
-                            <img src="/images/play-icon-white.png" alt="" />
-                            <span>Trailer</span>
-                        </TrailerButton>
+
+                        {trailers.length !== 0 && (
+                            <>
+                                <Popup
+                                    trigger={
+                                        <TrailerButton>
+                                            <img src="/images/play-icon-white.png" alt="" />
+                                            <span>Trailer</span>
+                                        </TrailerButton>
+                                    }
+                                    position="top center"
+                                    modal
+                                >
+                                    <YouTube
+                                        videoId={trailers[0].key}
+                                        opts={opts}
+                                    />
+                                </Popup>
+                            </>
+                        )}
                         <AddButton>
                             <span>+</span>
                         </AddButton>

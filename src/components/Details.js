@@ -9,6 +9,10 @@ import 'reactjs-popup/dist/index.css';
 import YouTube from "react-youtube";
 // import db from "../firebase";
 
+import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
 const Details = () => {
     // const history = useNavigate();
     const { id } = useParams();
@@ -16,11 +20,20 @@ const Details = () => {
     const [trailers, setTrailers] = useState([]);
     const imageBasePath = "https://image.tmdb.org/t/p/original";
 
+    let settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        autoplay: false
+    };
+
     const opts = {
         width: '100%',
 
         playerVars: {
-            autoplay: 1,
+            autoplay: 0,
             playsinline: 1
         }
     };
@@ -76,7 +89,7 @@ const Details = () => {
 
                         {trailers.length !== 0 && (
                             <>
-                                <Popup
+                                <CustomPopup
                                     trigger={
                                         <TrailerButton>
                                             <img src="/images/play-icon-white.png" alt="" />
@@ -86,11 +99,16 @@ const Details = () => {
                                     position="top center"
                                     modal
                                 >
-                                    <YouTube
-                                        videoId={trailers[0].key}
-                                        opts={opts}
-                                    />
-                                </Popup>
+                                    <Carousel {...settings}>
+                                        {trailers?.map(trailer => (
+                                            <YouTube
+                                                key={trailer.id}
+                                                videoId={trailer.key}
+                                                opts={opts}
+                                            />
+                                        ))}
+                                    </Carousel>
+                                </CustomPopup>
                             </>
                         )}
                         <AddButton>
@@ -123,6 +141,25 @@ const Container = styled.div`
     min-height: calc(100vh - 70px);
     padding: 0 calc(3.5vw + 5px);
     position: relative;
+`;
+
+const Carousel = styled(Slider)`
+    margin-top: 20px;
+
+    ul li button{
+        &:before{
+            font-size: 10px;
+            color: rgb(150, 158, 171);
+        }
+    }
+
+    li.slick-active button:before{
+        color: white;
+    }
+
+    button {
+        z-index: 1;
+    }
 `;
 
 const Background = styled.div`
@@ -225,4 +262,11 @@ const Description = styled.div`
     margin-top: 16px;
     color: rgb(249, 249, 249);
     max-width: 700px;
+`;
+
+const CustomPopup = styled(Popup)`
+    &-content{
+        background: transparent;
+        border: none;
+    }
 `;

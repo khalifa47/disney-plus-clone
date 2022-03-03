@@ -1,35 +1,49 @@
-import { doc, getDoc } from "firebase/firestore";
+// import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import db from "../firebase";
+import axios from '../requests/axios';
+import requests from "../requests/requests";
+// import db from "../firebase";
 
 const Details = () => {
-    const history = useNavigate();
+    // const history = useNavigate();
     const { id } = useParams();
     const [movie, setMovie] = useState();
+    const imageBasePath = "https://image.tmdb.org/t/p/original";
+
+    // useEffect(() => {
+    //     getDoc(doc(db, 'movies', id))
+    //         .then(doc => {
+    //             if (doc.exists) {
+    //                 setMovie(doc.data());
+    //             } else {
+    //                 history('/');
+    //             }
+    //         });
+    // }, []);
+
+
 
     useEffect(() => {
-        getDoc(doc(db, 'movies', id))
-            .then(doc => {
-                if (doc.exists) {
-                    setMovie(doc.data());
-                } else {
-                    history('/');
-                }
-            });
-    }, []);
+        const fetchData = async () => {
+            const request = await axios.get(requests.fetchById(id));
+            setMovie(request.data);
+            return request;
+        }
+        fetchData();
+    }, [id]);
 
     return (
         <Container>
             {movie && (
                 <>
                     <Background>
-                        <img src={movie.backgroundImg} alt="" />
+                        <img src={imageBasePath + movie.backdrop_path} alt="" />
                     </Background>
-                    <ImageTitle>
-                        <img src={movie.titleImg} alt="" />
-                    </ImageTitle>
+                    <Title>
+                        <h1>{movie.title}</h1>
+                    </Title>
                     <Controls>
                         <PlayButton>
                             <img src="/images/play-icon-black.png" alt="" />
@@ -49,10 +63,13 @@ const Details = () => {
                     </Controls>
 
                     <Subtitle>
-                        {movie.subTitle}
+                        {movie.release_date + " | " + movie.runtime + "m | " + movie.vote_average}
                     </Subtitle>
+                    <Tagline>
+                        {movie.tagline}
+                    </Tagline>
                     <Description>
-                        {movie.description}
+                        {movie.overview}
                     </Description>
                 </>
             )}
@@ -84,17 +101,18 @@ const Background = styled.div`
     }
 `;
 
-const ImageTitle = styled.div`
+const Title = styled.div`
     height: 30vh;
     min-height: 170px;
     width: 35vw;
     min-width: 200px;
     margin-top: 60px;
+    display: flex;
 
-    img{
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
+    h1{
+        font-size: 50px;
+        letter-spacing: 2px;
+        align-self: flex-end;
     }
 `;
 
@@ -154,6 +172,11 @@ const Subtitle = styled.div`
     font-size: 15px;
     min-height: 20px;
     margin-top: 26px;
+`;
+
+const Tagline = styled(Subtitle)`
+    font-size: 20px;
+    font-weight: bold;
 `;
 
 const Description = styled.div`

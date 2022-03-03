@@ -1,31 +1,35 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import styled from "styled-components";
 import ImgSlider from "./ImgSlider";
 import Movies from "./Movies";
 import Viewers from "./Viewers";
-import db from "../firebase";
-import { collection, onSnapshot } from "firebase/firestore";
-import { useDispatch } from "react-redux";
-import { setMovies } from "../features/movie/movieSlice";
+// import db from "../firebase";
+// import { collection, onSnapshot } from "firebase/firestore";
+// import { useDispatch } from "react-redux";
+// import { setMovies } from "../features/movie/movieSlice";
+import requests from "../requests/requests";
 
 const Home = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        onSnapshot(collection(db, 'movies'), (snapshot) => {
-            let tempMovies = snapshot.docs.map(doc => {
-                return { id: doc.id, ...doc.data() }
-            });
-            dispatch(setMovies(tempMovies));
-        });
+    // useEffect(() => {
+    //     onSnapshot(collection(db, 'movies'), (snapshot) => {
+    //         let tempMovies = snapshot.docs.map(doc => {
+    //             return { id: doc.id, ...doc.data() }
+    //         });
+    //         dispatch(setMovies(tempMovies));
+    //     });
 
-    }, []);
+    // }, []);
 
     return (
         <Container>
             <ImgSlider />
             <Viewers />
-            <Movies />
+            <Movies
+                title="Recommended For You"
+                fetchUrl={requests.fetchDiscover()}
+            />
         </Container>
     );
 }

@@ -1,19 +1,32 @@
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { selectMovies } from "../features/movie/movieSlice";
+// import { selectMovies } from "../features/movie/movieSlice";
+import axios from '../requests/axios';
 
-const Movies = () => {
-    const movies = useSelector(selectMovies);
+const Movies = ({ title, fetchUrl }) => {
+    // const movies = useSelector(selectMovies);
+    const [movies, setMovies] = useState([]);
+    const imageBasePath = "https://image.tmdb.org/t/p/original";
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const request = await axios.get(fetchUrl);
+            setMovies(request.data.results);
+            return request;
+        }
+        fetchData();
+    }, [fetchUrl]);
 
     return (
         <Container>
-            <h4>Recommended For You</h4>
+            <h4>{title}</h4>
             <Content>
                 {movies?.map(movie => (
                     <Wrap key={movie.id}>
                         <Link to={`/details/${movie.id}`}>
-                            <img src={movie.cardImg} alt="" />
+                            <img src={imageBasePath + movie.poster_path} alt="" />
                         </Link>
                     </Wrap>
                 ))}

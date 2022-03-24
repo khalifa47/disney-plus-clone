@@ -2,8 +2,11 @@ import Slider from "react-slick";
 import styled from "styled-components";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useEffect, useState } from "react";
+import axios from '../requests/axios';
+import { Link } from "react-router-dom";
 
-const ImgSlider = () => {
+const ImgSlider = ({ fetchImages }) => {
     let settings = {
         dots: true,
         infinite: true,
@@ -13,14 +16,31 @@ const ImgSlider = () => {
         autoplay: true
     };
 
+    const [images, setImages] = useState([]);
+    const imageBasePath = "https://image.tmdb.org/t/p/original";
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const request = await axios.get(fetchImages);
+            const tempArr = [];
+            for (let i = 0; i < 5; i++) {
+                tempArr.push(request.data.results[i]);
+            }
+            setImages(tempArr);
+            return request;
+        }
+        fetchData();
+    }, [fetchImages]);
+
     return (
         <Carousel {...settings}>
-            <Wrap>
-                <img src="/images/slider-badging.jpg" alt="" />
-            </Wrap>
-            <Wrap>
-                <img src="/images/slider-badag.jpg" alt="" />
-            </Wrap>
+            {images?.map(movie => (
+                <Wrap key={movie.id}>
+                    <Link to={`/details/${movie.id}`}>
+                        <img src={imageBasePath + movie.backdrop_path} alt="" />
+                    </Link>
+                </Wrap>
+            ))}
         </Carousel>
     );
 }
@@ -52,10 +72,13 @@ const Carousel = styled(Slider)`
 
 const Wrap = styled.div`
     cursor: pointer;
+
     img{
         border: 4px solid transparent;
         width: 100%;
         height: 100%;
+        max-height: 450px;
+        object-fit: cover;
         border-radius: 4px;
         box-shadow: rgb(0 0 0 / 69%) 0px 26px 30px -10px, rgb(0 0 0 / 73%) 0px 16px 10px -10px;
         transition-duration: 300ms;

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Login = () => {
@@ -5,7 +6,7 @@ const Login = () => {
         <Container>
             <CTA>
                 <CTALogoOne src='/images/cta-logo-one.svg' />
-                <SignUp>GET ALL THERE</SignUp>
+                <SignUp to="/home">GET ALL THERE</SignUp>
                 <Description>
                     Get The Disney Bundle to stream the best movies, shows, and sports with Disney+, Hulu, and ESPN+. Terms Apply. Learn more about The Disney Bundle.
                 </Description>
@@ -51,7 +52,7 @@ const CTA = styled.div`
 
 const CTALogoOne = styled.img``;
 
-const SignUp = styled.a`
+const SignUp = styled(Link)`
     width: 100%;
     background-color: #0063e5;
     font-weight: bold;

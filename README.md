@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+The Disney Plus clone (but not really :sweat_smile:) can be viewed [here](https://disney-clone-plus-ae2ae.web.app) on the deployed web app.
 
 ## Available Scripts
 

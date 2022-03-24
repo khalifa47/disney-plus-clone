@@ -3,7 +3,7 @@ The Disney Plus clone (but not really :sweat_smile:) can be viewed [here](https:
 The following libraries were used:
 1. [Redux Toolkit](https://redux-toolkit.js.org) - For state management
 2. [Axios](https://axios-http.com) - For HTTP requests
-3. [Firebase](https://firebase.google.com) - For hosting
+3. [Firebase](https://firebase.google.com) - For hosting and user auth
 4. [TMDB API](https://developers.themoviedb.org/3) - To retrieve movie information
 5. [React Slick and Carousel](https://react-slick.neostack.com) - For carousel and transitions
 6. [Styled Components](https://styled-components.com)
